@@ -46,7 +46,7 @@ variable "pi_method" {
  default     = "Static"
 }
 
-variable "ngs_name" {
+variable "nsg_name" {
  type        = string
  description = "Network Security Group Name"
  default     = "fredson-terraform-nsg"
