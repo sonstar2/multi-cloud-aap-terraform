@@ -1,0 +1,5 @@
+collections:
+
+  - name: cloud.terraform
+  
+  - name: infra.aap_configuration

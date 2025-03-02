@@ -1,0 +1,27 @@
+---
+- name: Deploy EC2 instance using terraform
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  collections:
+    - cloud.terraform
+
+  vars:
+    project_dir: '/tmp/deployment'
+
+  tasks:
+    - name: Grab instance info
+      ansible.builtin.git:
+       repo: https://github.com/sonstar2/multi-cloud-aap-terraform.git
+       dest: '{{ project_dir }}'
+
+    # - name: Set Password Variable
+    #   set_fact:
+    #     ansible_admin_pass: "{{ ansible_password }}"
+    #   no_log: true
+
+    - name: Deploy with force init
+      cloud.terraform.terraform:
+        project_path: '{{ project_dir }}/terraform/terraform-aws'
+        state: present
+        force_init: true
