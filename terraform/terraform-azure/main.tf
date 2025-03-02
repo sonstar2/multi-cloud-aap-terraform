@@ -91,7 +91,7 @@ resource "azurerm_network_interface_security_group_association" "tfnga" {
   network_security_group_id = azurerm_network_security_group.tfnsg.id
 }
 
-resource "azurerm_linux_virtual_machine" "app-server" {
+resource "azurerm_windows_virtual_machine" "app-server" {
   name                            = var.vm_name
   location                        = azurerm_resource_group.tfrg.location
   resource_group_name             = azurerm_resource_group.tfrg.name
