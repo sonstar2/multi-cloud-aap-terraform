@@ -1,9 +1,17 @@
+data "template_file" "script" {
+  template = file("windows_userdata.ps1")
+}
 
-# resource "azurerm_marketplace_agreement" "redhat" {
-#   publisher = "redhat"
-#   offer     = "rhel-byos"
-#   plan      = "rhel-lvm95"
-# }
+data "template_cloudinit_config" "config" {
+  gzip          = true
+  base64_encode = true
+
+  # Main cloud-config configuration file.
+  part {
+    content_type = "text/cloud-config"
+    content      = data.template_file.script.rendered
+  }
+}
 
 resource "azurerm_resource_group" "tfrg" {
   name     = var.rg_name
@@ -100,7 +108,9 @@ resource "azurerm_windows_virtual_machine" "app-server" {
   admin_username                  = "Administrator"
   admin_password                  = "{{ ansible_admin_pass }}"
 
-  user_data = file("windows_userdata.ps1")
+  custom_data = data.template_cloudinit_config.config.rendered
+
+  # user_data = file("windows_userdata.ps1")
 
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
