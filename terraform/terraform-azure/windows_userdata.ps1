@@ -21,7 +21,7 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/ansible/ansible/stable-
 C:\ConfigureRemotingForAnsible.ps1 -ForceNewSSLCert -EnableCredSSP
 
 # add ec2-user
-$Password = ConvertTo-SecureString {{ ansible_password }} -AsPlainText -Force
+$Password = ConvertTo-SecureString {{ ansible_admin_pass }} -AsPlainText -Force
 New-LocalUser -Name "ec2-user" -Description "Ansible Service Account" -Password $Password
 Add-LocalGroupMember -Group "Administrators" -Member "azure-user"
 
