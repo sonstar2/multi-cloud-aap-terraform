@@ -28,7 +28,7 @@ variable "sn_name" {
  default     = "fredson-terraform-subnet"
 }
 
-variable "sn_address_space" {
+variable "sn_prefixes" {
  type        = list(string)
  description = "Subnet Address Prefixes"
  default     = ["10.0.2.0/24"]
