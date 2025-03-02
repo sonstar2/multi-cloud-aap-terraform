@@ -1,3 +1,8 @@
+provider "azurerm" {
+  features {}
+  subscription_id = "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
+}
+
 data "template_file" "script" {
   template = file("windows_userdata.ps1")
 }
