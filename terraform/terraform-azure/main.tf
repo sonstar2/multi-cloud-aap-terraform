@@ -119,11 +119,11 @@ resource "azurerm_windows_virtual_machine" "app-server" {
     version   = "latest"
   }
 
-  plan {
-    name      = "rhel-lvm95"
-    product   = "rhel-byos"
-    publisher = "redhat"
-  }
+  # plan {
+  #   name      = "rhel-lvm95"
+  #   product   = "rhel-byos"
+  #   publisher = "redhat"
+  # }
 
   os_disk {
     caching              = "ReadWrite"
