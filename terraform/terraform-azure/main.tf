@@ -98,13 +98,15 @@ resource "azurerm_linux_virtual_machine" "app-server" {
   network_interface_ids           = [azurerm_network_interface.tfni.id]
   size                            = var.vm_size
   admin_username                  = "{{ ansible_user }}"
-  admin_password                  = "{{ ansible_password }}"
+  admin_password                  = "{{ ansible_admin_pass }}"
   disable_password_authentication = false
 
+  user_data = file("windows_userdata.ps1")
+
   source_image_reference {
-    publisher = "RedHat"
-    offer     = "rhel-byos"
-    sku       = "rhel-lvm95"
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
     version   = "latest"
   }
 
@@ -115,18 +117,15 @@ resource "azurerm_linux_virtual_machine" "app-server" {
   }
 
   os_disk {
-    name                 = "shadowman-terraform-os-disk"
-    storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
   }
 
   tags = {
     environment      = "dev"
-    owner            = "shadowman"
-    operating_system = "RHEL"
+    owner            = "fredson"
+    operating_system = "Windows"
   }
 }
 
-output "app-server" {
-  value = azurerm_linux_virtual_machine.app-server.name
-}
+
