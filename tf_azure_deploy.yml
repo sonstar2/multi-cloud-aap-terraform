@@ -1,5 +1,5 @@
 ---
-- name: Deploy EC2 instance using terraform
+- name: Deploy Azure instance using terraform
   hosts: localhost
   connection: local
   gather_facts: false
@@ -15,10 +15,10 @@
        repo: https://github.com/sonstar2/multi-cloud-aap-terraform.git
        dest: '{{ project_dir }}'
 
-    # - name: Set Password Variable
-    #   set_fact:
-    #     ansible_admin_pass: "{{ ansible_password }}"
-    #   no_log: true
+    - name: Set Password Variable
+      set_fact:
+        ansible_admin_pass: "{{ ansible_password }}"
+      no_log: true
 
     - name: Deploy terraform userdata file
       ansible.builtin.template:
