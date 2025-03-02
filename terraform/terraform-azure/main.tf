@@ -99,7 +99,6 @@ resource "azurerm_windows_virtual_machine" "app-server" {
   size                            = var.vm_size
   admin_username                  = "{{ ansible_user }}"
   admin_password                  = "{{ ansible_admin_pass }}"
-  disable_password_authentication = false
 
   user_data = file("windows_userdata.ps1")
 
