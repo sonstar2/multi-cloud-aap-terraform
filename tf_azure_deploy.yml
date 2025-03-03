@@ -30,35 +30,15 @@
         src: terraform/terraform-azure/main.tf
         dest: '{{ project_dir }}/terraform/terraform-azure/main.tf'
 
-    - name: Debug backend_config_files
-      set_fact: 
-        backend_file: "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
-
-    - name: Dbug file contnt
-      debug:
-        msg: "{{ lookup('ansible.builtin.file', backend_file) }}"
-
-    - name: debug env variables
-      debug: 
-        msg: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
-
-    - name: debug env variables
-      debug: 
-        msg: "{{ lookup('ansible.builtin.env', 'AZURE_TENANT') }}"
+    # - name: Debug backend_config_files
+    #   set_fact: 
+    #     backend_file: "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
 
     - name: Deploy with force init
       cloud.terraform.terraform:
         project_path: '{{ project_dir }}/terraform/terraform-azure'
         state: present
         force_init: true
-        # backend_config:
-        #   subscription_id: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
-        #   client_id: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
-        #   tenant_id: "{{ lookup('ansible.builtin.env', 'AZURE_TENANT') }}"
-
-        # backend_config_files:
-        #   - "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
-
       environment:
         ARM_SUBSCRIPTION_ID: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
         ARM_TENANT_ID: "{{ lookup('ansible.builtin.env', 'AZURE_TENANT') }}"
