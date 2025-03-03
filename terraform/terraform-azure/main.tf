@@ -125,7 +125,7 @@ resource "azurerm_windows_virtual_machine" "app-server" {
   resource_group_name             = azurerm_resource_group.tfrg.name
   network_interface_ids           = [azurerm_network_interface.tfni.id]
   size                            = var.vm_size
-  admin_username                  = "Administrator"
+  admin_username                  = "fredson"
   admin_password                  = "{{ ansible_admin_pass }}"
 
   custom_data = data.template_cloudinit_config.config.rendered
