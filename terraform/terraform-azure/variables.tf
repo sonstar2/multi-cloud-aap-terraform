@@ -67,7 +67,7 @@ variable "nic_ip_name" {
 variable "vm_name" {
  type        = string
  description = "Virtual Machine Name"
- default     = "winapp.fredson.dev"
+ default     = "winapp"
 }
 
 variable "vm_size" {
