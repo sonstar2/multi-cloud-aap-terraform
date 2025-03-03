@@ -172,7 +172,7 @@ resource "azurerm_windows_virtual_machine" "app-server" {
 }
 
 data "template_file" "script" {
-  template = "$file("windows_userdata.ps1")}"
+  template = "${file("windows_userdata.ps1")}"
 }
 
 resource "azurerm_virtual_machine_extension" "enable_winrm" {
