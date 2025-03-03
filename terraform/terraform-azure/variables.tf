@@ -7,7 +7,7 @@ variable "rg_name" {
 variable "rg_location" {
  type        = string
  description = "Resource Group Location"
- default     = "Australia-East"
+ default     = "Australia East"
 }
 
 variable "vn_name" {
