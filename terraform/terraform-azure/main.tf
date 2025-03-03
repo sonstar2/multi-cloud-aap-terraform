@@ -18,10 +18,6 @@ provider "azurerm" {
   features {}
 }
 
-data "template_file" "script" {
-  template = file("windows_userdata.ps1")
-}
-
 data "template_cloudinit_config" "config" {
   gzip          = true
   base64_encode = true
@@ -173,4 +169,22 @@ resource "azurerm_windows_virtual_machine" "app-server" {
     owner            = "fredson"
     operating_system = "Windows"
   }
+}
+
+data "template_file" "script" {
+  template = "$file("windows_userdata.ps1")}"
+}
+
+resource "azurerm_virtual_machine_extension" "enable_winrm" {
+  name                 = "enable_winrm"
+  virtual_machine_id   = azurerm_windows_virtual_machine.app-server.id
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
+
+  protected_settings = <<SETTINGS
+  {    
+    "commandToExecute": "powershell -command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('${base64encode(data.template_file.script.rendered)}')) | Out-File -filepath script.ps1\" && powershell -ExecutionPolicy Unrestricted -File script.ps1"
+  }
+  SETTINGS
 }
