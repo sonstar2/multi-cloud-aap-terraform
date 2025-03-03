@@ -1,9 +1,3 @@
-variable "storage_account_name" {
- type        = string
- description = "storage_account_name"
- default     = "fredsonstorage"
-}
-
 variable "rg_name" {
  type        = string
  description = "Resource Group Name"
