@@ -31,8 +31,9 @@
         dest: '{{ project_dir }}/terraform/terraform-azure/main.tf'
 
     - name: Debug backend_config_files
-      debug: var=lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE')
-      
+      debug: 
+        msg: "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
+
     - name: Deploy with force init
       cloud.terraform.terraform:
         project_path: '{{ project_dir }}/terraform/terraform-azure'
