@@ -40,12 +40,17 @@
 
     - name: debug env variables
       debug: 
-        msg: "{{ lookup('ansible.builtin.env', 'ARM_SUBSCRIPTION_ID') }}"
+        msg: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
 
     - name: Deploy with force init
       cloud.terraform.terraform:
         project_path: '{{ project_dir }}/terraform/terraform-azure'
         state: present
         force_init: true
+        backend_config:
+          subscription_id: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
+          client_id: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
+          tenant_id: "{{ lookup('ansible.builtin.env', 'AZURE_TENNANT') }}"
+
         backend_config_files:
           - "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
