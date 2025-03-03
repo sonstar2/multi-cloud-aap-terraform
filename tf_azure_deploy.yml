@@ -35,3 +35,5 @@
         project_path: '{{ project_dir }}/terraform/terraform-azure'
         state: present
         force_init: true
+        backend_config_files:
+          - "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
