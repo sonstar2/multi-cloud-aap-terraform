@@ -38,6 +38,9 @@
       debug:
         msg: "{{ lookup('ansible.builtin.file', backend_file) }}"
 
+    - name: debug env variables
+      debug: vars=lookup('ansible.builtin.env', 'ARM_SUBSCRIPTION_ID')
+
     - name: Deploy with force init
       cloud.terraform.terraform:
         project_path: '{{ project_dir }}/terraform/terraform-azure'
