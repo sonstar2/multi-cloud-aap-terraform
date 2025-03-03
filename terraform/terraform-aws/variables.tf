@@ -31,5 +31,5 @@ variable "availability_zone" {
 variable "vm_name" {
  type        = string
  description = "Virtual Machine Name"
- default     = "rhel9app.fredson.dev"
+ default     = "rhel9app"
 }
