@@ -51,10 +51,16 @@
         project_path: '{{ project_dir }}/terraform/terraform-azure'
         state: present
         force_init: true
-        backend_config:
-          subscription_id: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
-          client_id: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
-          tenant_id: "{{ lookup('ansible.builtin.env', 'AZURE_TENANT') }}"
+        # backend_config:
+        #   subscription_id: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
+        #   client_id: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
+        #   tenant_id: "{{ lookup('ansible.builtin.env', 'AZURE_TENANT') }}"
 
-        backend_config_files:
-          - "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
+        # backend_config_files:
+        #   - "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
+
+      environment:
+        ARM_SUBSCRIPTION_ID: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
+        ARM_TENANT_ID: "{{ lookup('ansible.builtin.env', 'AZURE_TENANT') }}"
+        ARM_CLIENT_ID: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
+        ARM_CLIENT_SECRET: "{{ lookup('ansible.builtin.env', 'AZURE_SECRET') }}"
