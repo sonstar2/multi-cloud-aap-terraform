@@ -42,6 +42,10 @@
       debug: 
         msg: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
 
+    - name: debug env variables
+      debug: 
+        msg: "{{ lookup('ansible.builtin.env', 'AZURE_TENNANT') }}"
+
     - name: Deploy with force init
       cloud.terraform.terraform:
         project_path: '{{ project_dir }}/terraform/terraform-azure'
