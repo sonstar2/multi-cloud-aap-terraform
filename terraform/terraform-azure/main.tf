@@ -164,7 +164,7 @@ resource "azurerm_windows_virtual_machine" "app-server" {
 }
 
 resource "azurerm_windows_virtual_machine" "db-server" {
-  name                            = var.vm_name
+  name                            = var.vm_name2
   location                        = azurerm_resource_group.tfrg.location
   resource_group_name             = azurerm_resource_group.tfrg.name
   network_interface_ids           = [azurerm_network_interface.tfni.id]

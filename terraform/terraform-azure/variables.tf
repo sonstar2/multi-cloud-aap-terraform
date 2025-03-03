@@ -70,6 +70,12 @@ variable "vm_name" {
  default     = "winapp"
 }
 
+variable "vm_name2" {
+ type        = string
+ description = "Virtual Machine Name"
+ default     = "windb"
+}
+
 variable "vm_size" {
  type        = string
  description = "Virtual Machine Size"
