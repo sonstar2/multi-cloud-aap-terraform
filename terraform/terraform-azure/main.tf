@@ -159,42 +159,10 @@ resource "azurerm_windows_virtual_machine" "app-server" {
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
+    sku       = "2019-Datacenter"
     version   = "latest"
   }
 
-  os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
-  }
-
-  tags = {
-    environment      = "dev"
-    owner            = "fredson"
-    operating_system = "Windows"
-  }
-}
-
-resource "azurerm_windows_virtual_machine" "db-server" {
-  name                            = var.vm_name2
-  location                        = azurerm_resource_group.tfrg.location
-  resource_group_name             = azurerm_resource_group.tfrg.name
-  network_interface_ids           = [azurerm_network_interface.tfni.id]
-  size                            = var.vm_size
-  admin_username                  = "fredson"
-  admin_password                  = "{{ ansible_admin_pass }}"
-
-  custom_data = data.template_cloudinit_config.config.rendered
-
-  # user_data = file("windows_userdata.ps1")
-
-  source_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest"
-  }
-  
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
