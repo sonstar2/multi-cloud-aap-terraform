@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "gcs" {
-    bucket         = "tfstate-bucket"
+    bucket         = "ansible_tfstate-bucket"
     prefix         = "terraform.tfstate"
   }
 }
