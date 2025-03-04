@@ -11,13 +11,7 @@ terraform {
   }
 }
 
-  # backend "gcs" {
-  #   bucket         = "ansible_tfstate-bucket"
-  #   prefix         = "terraform.tfstate"
-  # }
-
 provider "google" {
-  # credentials = var.gcp_credentials_path
   project = var.gcp_project
   region = var.region
   zone = var.zone
