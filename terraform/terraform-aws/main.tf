@@ -75,7 +75,7 @@ resource "aws_network_interface" "ansible-nic" {
 }
 
 resource "aws_eip" "ip-one" {
-  domain                    = "vpc"
+  # domain                    = "vpc"
   network_interface         = aws_network_interface.ansible-nic.id
   depends_on                = [aws_instance.app-server]
   tags = {
