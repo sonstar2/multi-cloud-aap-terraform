@@ -5,6 +5,7 @@ terraform {
       version = "5.12.0"
     }
   }
+  backend "local" {}
 
   # backend "gcs" {
   #   bucket         = "ansible_tfstate-bucket"
