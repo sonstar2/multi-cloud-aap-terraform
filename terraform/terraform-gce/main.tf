@@ -6,10 +6,10 @@ terraform {
     }
   }
 
-  backend "gcs" {
-    bucket         = "ansible_tfstate-bucket"
-    prefix         = "terraform.tfstate"
-  }
+  # backend "gcs" {
+  #   bucket         = "ansible_tfstate-bucket"
+  #   prefix         = "terraform.tfstate"
+  # }
 }
 
 provider "google" {
