@@ -15,6 +15,11 @@
        repo: https://github.com/sonstar2/multi-cloud-aap-terraform.git
        dest: '{{ project_dir }}'
 
+    - name: Debug backend_config_files
+      debug: 
+        msg: "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
+
+
     - name: Deploy with force init
       cloud.terraform.terraform:
         project_path: '{{ project_dir }}/terraform/terraform-gce'
