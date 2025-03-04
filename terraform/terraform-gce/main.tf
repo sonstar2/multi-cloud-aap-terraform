@@ -5,12 +5,11 @@ terraform {
       version = "5.12.0"
     }
   }
-  backend "local" {}
-
-  # backend "gcs" {
-  #   bucket         = "ansible_tfstate-bucket"
-  #   prefix         = "terraform.tfstate"
-  # }
+  
+  backend "gcs" {
+    bucket         = "ansible_tfstate-bucket"
+    prefix         = "terraform.tfstate"
+  }
 }
 
 provider "google" {
