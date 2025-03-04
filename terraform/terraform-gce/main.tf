@@ -33,7 +33,7 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
     }
   }
 
-network_interface {
+  network_interface {
     network = "default"
   }
 }
