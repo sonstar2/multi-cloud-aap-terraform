@@ -28,7 +28,7 @@ resource "google_compute_network" "ipv6net" {
 resource "google_compute_subnetwork" "ipv6subnet" {
   provider = google
   name = "ipv6subnet"
-  network = google_compute_network.ipv6.id
+  network = google_compute_network.ipv6et.id
   ip_cidr_range = "10.0.0.0/8"
   stack_type = "IPV4_IPV6"
   ipv6_access_type = "EXTERNAL"
@@ -69,7 +69,7 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
       network_tier  = "PREMIUM"
     }
   }
-  
+
   boot_disk {
     initialize_params {
       image = var.image
