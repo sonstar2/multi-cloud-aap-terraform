@@ -25,5 +25,6 @@
         project_path: '{{ project_dir }}/terraform/terraform-gce'
         state: present
         force_init: true
-        # backend_config_files:
-        #   - "{{ lookup('env', 'TF_BACKEND_CONFIG_FILE') }}"
+      environment:
+        GOOGLE_APPLICATION_CREDENTIALS: "{{ lookup('ansible.builtin.env', 'GCE_CREDENTIALS_FILE_PATH') }}"
+

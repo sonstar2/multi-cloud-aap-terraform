@@ -6,8 +6,9 @@ terraform {
     }
   }
 
-  backend "local" {
-    path = "terraform.tfstate"
+  backend "gcs" {
+    bucket  = "ansible_tfstate-bucket"
+    prefix  = "terraform/state"
   }
 }
 
