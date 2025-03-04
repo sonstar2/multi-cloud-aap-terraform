@@ -18,11 +18,58 @@ provider "google" {
   zone = var.zone
 }
 
+# Create a network
+resource "google_compute_network" "ipv6net" {
+  provider = google
+  name = "ipv6net"
+  auto_create_subnetworks = false
+}
+# Create a subnet with IPv6 capabilities
+resource "google_compute_subnetwork" "ipv6subnet" {
+  provider = google
+  name = "ipv6subnet"
+  network = google_compute_network.ipv6.id
+  ip_cidr_range = "10.0.0.0/8"
+  stack_type = "IPV4_IPV6"
+  ipv6_access_type = "EXTERNAL"
+}
+# Allow SSH from all IPs (insecure, but ok for this tutorial)
+resource "google_compute_firewall" "firewall" {
+  provider = google
+  name    = "firewall"
+  network = google_compute_network.ipv6net.name
+
+  allow {
+    protocol = "icmp"
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+}
+
+
 resource "google_compute_instance" "tf-demo-gcp-instance-1" {
   name         = var.vm_name
   machine_type = var.machine_type
   zone = var.zone
 
+  network_interface {
+    network = google_compute_network.ipv6net.id
+    subnetwork = google_compute_subnetwork.ipv6subnet.id
+    stack_type = "IPV4_IPV6"
+    access_config {
+      nat_ip = google_compute_address.ipv4.address
+      network_tier = "PREMIUM"
+    }
+
+    ipv6_access_config {
+      network_tier  = "PREMIUM"
+    }
+  }
+  
   boot_disk {
     initialize_params {
       image = var.image
@@ -30,10 +77,6 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
         my_label = "value"
       }
     }
-  }
-
-  network_interface {
-    network = "default"
   }
 }
 
