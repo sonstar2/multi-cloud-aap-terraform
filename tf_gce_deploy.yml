@@ -1,0 +1,22 @@
+---
+- name: Deploy Azure instance using terraform
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  collections:
+    - cloud.terraform
+
+  vars:
+    project_dir: '/tmp/deployment'
+
+  tasks:
+    - name: Grab instance info
+      ansible.builtin.git:
+       repo: https://github.com/sonstar2/multi-cloud-aap-terraform.git
+       dest: '{{ project_dir }}'
+
+    - name: Deploy with force init
+      cloud.terraform.terraform:
+        project_path: '{{ project_dir }}/terraform/terraform-gce'
+        state: present
+        force_init: true
