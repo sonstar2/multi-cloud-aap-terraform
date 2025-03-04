@@ -28,7 +28,7 @@ resource "google_compute_network" "ipv6net" {
 resource "google_compute_subnetwork" "ipv6subnet" {
   provider = google
   name = "ipv6subnet"
-  network = google_compute_network.ipv6et.id
+  network = google_compute_network.ipv6net.id
   ip_cidr_range = "10.0.0.0/8"
   stack_type = "IPV4_IPV6"
   ipv6_access_type = "EXTERNAL"
