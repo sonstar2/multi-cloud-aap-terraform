@@ -5,12 +5,16 @@ terraform {
       version = "5.12.0"
     }
   }
-  
-  backend "gcs" {
-    bucket         = "ansible_tfstate-bucket"
-    prefix         = "terraform.tfstate"
+
+  backend "local" {
+    path = "terraform.tfstate"
   }
 }
+
+  # backend "gcs" {
+  #   bucket         = "ansible_tfstate-bucket"
+  #   prefix         = "terraform.tfstate"
+  # }
 
 provider "google" {
   # credentials = var.gcp_credentials_path
