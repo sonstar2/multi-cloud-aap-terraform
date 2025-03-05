@@ -87,10 +87,10 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
 
   tags = {
     Name = var.vm_name
-    owner: "fredson"
-    env: "dev"
-    operating_system: "Debian"
-    usage: "fredsondemo"
+    owner = "fredson"
+    env = "dev"
+    operating_system = "Debian"
+    usage = "fredsondemo"
   }
 }
 

@@ -3,5 +3,5 @@ output "host_name" {
 }
 
 output "public_ip" {
-  value = network_interface.access_config.nat_ip
+  value = google_compute_instance.network_interface.access_config.nat_ip
 }
