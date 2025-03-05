@@ -89,7 +89,7 @@ resource "aws_security_group" "web-pub-sg" {
   tags = {
     "Name" = "Ansible-Terraform-SG"
   }
-  vpc_id      = aws_vpc.ansiblevpc.id
+  vpc_id      = aws_security_group.web-pub-sg.id
   ingress {
     description = "from my ip range"
     from_port   = "22"
