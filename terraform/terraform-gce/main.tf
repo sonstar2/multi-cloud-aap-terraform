@@ -84,7 +84,7 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
       }
     }
   }
-  tags = ["Debian", "Linux"]
+  tags = ["debian", "linux"]
 }
 
 resource "google_compute_project_metadata" "my_ssh_key" {
