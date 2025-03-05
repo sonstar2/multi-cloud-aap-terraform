@@ -32,39 +32,40 @@ resource "aws_subnet" "private" {
     "Name" = "Ansible-Terraform-Subnet-Private"
   }
 }
-# resource "aws_subnet" "public" {
-#   vpc_id            = aws_vpc.ansiblevpc.id
-#   cidr_block        = var.subnet_public_cidr
-#   availability_zone = var.availability_zone
-#   tags = {
-#     "Name" = "Ansible-Terraform-Subnet-Public"
-#   }
-# }
-# resource "aws_route_table" "ansible-rt" {
-#   vpc_id = aws_vpc.ansiblevpc.id
-#   tags = {
-#     "Name" = "Ansible-Terraform-RT"
-#   }
-# }
-# resource "aws_route_table_association" "public" {
-#   subnet_id      = aws_subnet.public.id
-#   route_table_id = aws_route_table.ansible-rt.id
-# }
-# resource "aws_route_table_association" "private" {
-#   subnet_id      = aws_subnet.private.id
-#   route_table_id = aws_route_table.ansible-rt.id
-# }
-# resource "aws_internet_gateway" "ansible-igw" {
-#   vpc_id = aws_vpc.ansiblevpc.id
-#   tags = {
-#     "Name" = "Ansible-Terraform-IG"
-#   }
-# }
-# resource "aws_route" "internet-route" {
-#   destination_cidr_block = "0.0.0.0/0"
-#   route_table_id         = aws_route_table.ansible-rt.id
-#   gateway_id             = aws_internet_gateway.ansible-igw.id
-# }
+resource "aws_subnet" "public" {
+  vpc_id            = aws_vpc.ansiblevpc.id
+  cidr_block        = var.subnet_public_cidr
+  availability_zone = var.availability_zone
+  tags = {
+    "Name" = "Ansible-Terraform-Subnet-Public"
+  }
+}
+resource "aws_route_table" "ansible-rt" {
+  vpc_id = aws_vpc.ansiblevpc.id
+  tags = {
+    "Name" = "Ansible-Terraform-RT"
+  }
+}
+resource "aws_route_table_association" "public" {
+  subnet_id      = aws_subnet.public.id
+  route_table_id = aws_route_table.ansible-rt.id
+}
+resource "aws_route_table_association" "private" {
+  subnet_id      = aws_subnet.private.id
+  route_table_id = aws_route_table.ansible-rt.id
+}
+resource "aws_internet_gateway" "ansible-igw" {
+  vpc_id = aws_vpc.ansiblevpc.id
+  tags = {
+    "Name" = "Ansible-Terraform-IG"
+  }
+}
+resource "aws_route" "internet-route" {
+  destination_cidr_block = "0.0.0.0/0"
+  route_table_id         = aws_route_table.ansible-rt.id
+  gateway_id             = aws_internet_gateway.ansible-igw.id
+}
+
 # resource "aws_network_interface" "ansible-nic" {
 #   subnet_id       = aws_subnet.public.id
 #   private_ips     = ["11.0.1.120"]
