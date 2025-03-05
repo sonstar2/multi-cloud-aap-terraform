@@ -81,7 +81,7 @@ resource "aws_network_interface" "ansible-nic" {
 #   tags = {
 #     "Name" = "Ansible-Terraform-EIP"
 #   }
-}
+# }
 
 resource "aws_security_group" "web-pub-sg" {
   name        = "Ansible_SG"                ### Survey
