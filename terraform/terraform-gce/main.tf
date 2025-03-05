@@ -85,7 +85,7 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
     }
   }
 
-  labels {
+  labels = {
     public_ip = google_compute_address.static-ip.address
   } 
 }
