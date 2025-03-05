@@ -84,6 +84,14 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
       }
     }
   }
+
+  tags = {
+    Name = var.vm_name
+    owner: "fredson"
+    env: "dev"
+    operating_system: "Debian"
+    usage: "fredsondemo"
+  }
 }
 
 resource "google_compute_project_metadata" "my_ssh_key" {
