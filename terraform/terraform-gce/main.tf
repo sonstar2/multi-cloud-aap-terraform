@@ -84,6 +84,10 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
       }
     }
   }
+
+  labels {
+    public_ip: google_compute_address.static-ip.address
+  } 
 }
 
 resource "google_compute_project_metadata" "my_ssh_key" {
