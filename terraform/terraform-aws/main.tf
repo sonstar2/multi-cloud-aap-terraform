@@ -89,7 +89,7 @@ resource "aws_security_group" "web-pub-sg" {
   tags = {
     "Name" = "Ansible-Terraform-SG"
   }
-  vpc_id      = aws_security_group.web-pub-sg.id
+  vpc_id      = aws_vpc.ansiblevpc.id
   ingress {
     description = "from my ip range"
     from_port   = "22"
@@ -119,7 +119,7 @@ resource "aws_instance" "app-server" {
   #   device_index         = 0
   # }
   subnet_id = aws_subnet.private.id
-  vpc_security_group_ids = var.security_group_ids
+  vpc_security_group_ids = aws_security_group.web-pub-sg.id
   associate_public_ip_address = true
 
   key_name = "aws-test-key"
