@@ -50,12 +50,12 @@ resource "google_compute_firewall" "firewall" {
   }
 }
 
-resource "google_compute_address" "static-ip" {
-  provider = google
-  name = "static-ip"
-  address_type = "EXTERNAL"
-  network_tier = "PREMIUM"
-}
+# resource "google_compute_address" "static-ip" {
+#   provider = google
+#   name = "static-ip"
+#   address_type = "EXTERNAL"
+#   network_tier = "PREMIUM"
+# }
 
 resource "google_compute_instance" "tf-demo-gcp-instance-1" {
   name         = var.vm_name
@@ -67,8 +67,8 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
     subnetwork = google_compute_subnetwork.ipv6subnet.id
     stack_type = "IPV4_IPV6"
     access_config {
-      nat_ip = google_compute_address.static-ip.address
-      network_tier = "PREMIUM"
+      # nat_ip = google_compute_address.static-ip.address
+      # network_tier = "PREMIUM"
     }
 
     ipv6_access_config {
@@ -84,10 +84,6 @@ resource "google_compute_instance" "tf-demo-gcp-instance-1" {
       }
     }
   }
-
-  labels = {
-    public_ip = google_compute_address.static-ip.address
-  } 
 }
 
 resource "google_compute_project_metadata" "my_ssh_key" {
