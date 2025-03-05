@@ -74,13 +74,13 @@ resource "aws_network_interface" "ansible-nic" {
   }
 }
 
-resource "aws_eip" "ip-one" {
-  # domain                    = "vpc"
-  network_interface         = aws_network_interface.ansible-nic.id
-  depends_on                = [aws_instance.app-server]
-  tags = {
-    "Name" = "Ansible-Terraform-EIP"
-  }
+# resource "aws_eip" "ip-one" {
+#   # domain                    = "vpc"
+#   network_interface         = aws_network_interface.ansible-nic.id
+#   depends_on                = [aws_instance.app-server]
+#   tags = {
+#     "Name" = "Ansible-Terraform-EIP"
+#   }
 }
 
 resource "aws_security_group" "web-pub-sg" {
@@ -118,6 +118,8 @@ resource "aws_instance" "app-server" {
     network_interface_id = aws_network_interface.ansible-nic.id
     device_index         = 0
   }
+  associate_public_ip_address = true
+
   key_name = "aws-test-key"
   tags = {
       Name = var.vm_name
@@ -127,5 +129,3 @@ resource "aws_instance" "app-server" {
       usage: "fredsondemo"
       }
 }
-
-
