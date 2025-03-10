@@ -1,0 +1,35 @@
+---
+- name: Playbook for SNOW Integration
+  hosts: all
+  connection: local
+  gather_facts: false
+  tasks:
+
+  - name: Run Once block
+    block:
+    - name: Set Concerns Message
+      ansible.builtin.set_fact:
+        snow_change_message: "{{ lookup('ansible.builtin.template', 'templates/snow_close_message.j2') }}"
+
+    - name: Place a change request in ServiceNow in Review
+      servicenow.itsm.change_request:
+        instance:
+          host: "{{ servicenow_hostname }}"
+          username: "{{ servicenow_username }}"
+          password: "{{ servicenow_password }}"
+        state: review
+        number: "{{ request.record.number }}"
+      delegate_to: localhost
+
+    - name: Close a change request
+      servicenow.itsm.change_request:
+        instance:
+          host: "{{ servicenow_hostname }}"
+          username: "{{ servicenow_username }}"
+          password: "{{ servicenow_password }}"
+        state: closed
+        number: "{{ request.record.number }}"
+        close_code: "{{ close_code }}"
+        close_notes: "{{ snow_change_message }}"
+      delegate_to: localhost
+    run_once: true

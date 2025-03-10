@@ -51,4 +51,5 @@
       ansible.builtin.set_stats:
         data:
           azure_tf_plan: "{{ terraform_output.stdout }}"
+          azure_vm_name: "{{ terraform_output.outputs.host_name.value }}"
         per_host: false
