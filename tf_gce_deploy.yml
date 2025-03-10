@@ -16,8 +16,12 @@
        dest: '{{ project_dir }}'
 
     - name: Debug backend_config_files
-      debug: 
-        msg: "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
+      set_fact: 
+        cred_file_path: "{{ lookup('ansible.builtin.env', 'GCE_CREDENTIALS_FILE_PATH') }}"
+
+    - name: print
+      debug:
+        var: lookup('ansible.builtin.env', cred_file_path)
 
 
     - name: Deploy with force init
