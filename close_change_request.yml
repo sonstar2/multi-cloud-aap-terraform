@@ -10,11 +10,16 @@
     - name: Set Change Close Message
       ansible.builtin.set_fact:
         snow_change_message: >-
-          terraform apply for {{ ec2_vm_name | default(omit)}} 
+          terraform apply for {{ ec2_vm_name | default(omit)}}
+          ====================================================
           {{ ec2_tf_plan }}
+          ====================================================
           terraform apply for {{ gce_vm_name | default(omit)}} 
+          ====================================================
           {{ gce_tf_plan }}
-          terraform apply for {{ azure_vm_name | default(omit)}} 
+          ====================================================
+          terraform apply for {{ azure_vm_name | default(omit)}}
+          ====================================================
           {{ azure_tf_plan }}
 
     - name: Place a change request in ServiceNow in Review
