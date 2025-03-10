@@ -5,7 +5,7 @@
   gather_facts: false
   tasks:
 
-  - name: Set Concerns Message
+  - name: Set Change Message
     ansible.builtin.set_fact:
       snow_change_message: >-
         terraform plan for {{ ec2_vm_name | default(omit)}} 
