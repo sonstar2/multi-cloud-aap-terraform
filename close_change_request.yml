@@ -9,7 +9,7 @@
     block:
     - name: Set Change Close Message
       ansible.builtin.set_fact:
-        snow_change_message: >-
+        snow_change_message: |-
           terraform apply for {{ ec2_vm_name | default(omit)}}
           ====================================================
           {{ ec2_tf_plan }}
