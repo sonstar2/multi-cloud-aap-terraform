@@ -24,7 +24,7 @@
       ansible.builtin.template:
         src: terraform/terraform-azure/windows_userdata.ps1
         dest: '{{ project_dir }}/terraform/terraform-azure/windows_userdata.ps1'
-  
+
     - name: Deploy terraform variable file
       ansible.builtin.template:
         src: terraform/terraform-azure/main.tf
@@ -44,3 +44,11 @@
         ARM_TENANT_ID: "{{ lookup('ansible.builtin.env', 'AZURE_TENANT') }}"
         ARM_CLIENT_ID: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
         ARM_CLIENT_SECRET: "{{ lookup('ansible.builtin.env', 'AZURE_SECRET') }}"
+      check_mode: "{{ bool_terraform_plan_mode }}"
+      register: terraform_output
+
+    - name: Set Stats Terraform plan/apply
+      ansible.builtin.set_stats:
+        data:
+          azure_tf_plan: "{{ terraform_output.stdout }}"
+        per_host: false

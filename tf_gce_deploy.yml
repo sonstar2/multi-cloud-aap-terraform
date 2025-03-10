@@ -37,5 +37,5 @@
     - name: Set Stats Terraform plan/apply
       ansible.builtin.set_stats:
         data:
-          gce_tf_plan: "{{ terraform_output }}"
+          gce_tf_plan: "{{ terraform_output.stdout }}"
         per_host: false

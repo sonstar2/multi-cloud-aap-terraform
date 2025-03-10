@@ -25,3 +25,11 @@
         project_path: '{{ project_dir }}/terraform/terraform-aws'
         state: present
         force_init: true
+      check_mode: "{{ bool_terraform_plan_mode }}"
+      register: terraform_output
+
+    - name: Set Stats Terraform plan/apply
+      ansible.builtin.set_stats:
+        data:
+          ec2_tf_plan: "{{ terraform_output.stdout }}"
+        per_host: false
