@@ -8,11 +8,18 @@
   - name: Set Change Message
     ansible.builtin.set_fact:
       snow_change_message: >-
-        terraform plan for {{ ec2_vm_name | default(omit)}} 
+        terraform plan for {{ ec2_vm_name | default(omit)}}
+        ====================================================
         {{ ec2_tf_plan | default(omit)}}
+        ====================================================
+
         terraform plan for {{ gce_vm_name | default(omit)}} 
+        ====================================================
         {{ gce_tf_plan | default(omit)}}
-        terraform plan for {{ azure_vm_name | default(omit)}} 
+        ====================================================
+        
+        terraform plan for {{ azure_vm_name | default(omit)}}
+        ===================================================== 
         {{ azure_tf_plan | default(omit)}}
 
   - name: Create change request
