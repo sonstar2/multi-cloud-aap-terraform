@@ -21,7 +21,7 @@
 
     - name: print
       debug:
-        var: lookup('ansible.builtin.env', cred_file_path)
+        var: lookup('ansible.builtin.fle', cred_file_path)
 
 
     - name: Deploy with force init
