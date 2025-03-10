@@ -1,5 +1,5 @@
 output "host_name" {
-  value = google_compute_instance.tf-demo-gcp-instance-1.name
+  value = google_compute_instance.app-server.name
 }
 
 # output "public_ip" {
