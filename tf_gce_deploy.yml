@@ -15,13 +15,13 @@
        repo: https://github.com/sonstar2/multi-cloud-aap-terraform.git
        dest: '{{ project_dir }}'
 
-    - name: Debug backend_config_files
-      set_fact: 
-        cred_file_path: "{{ lookup('ansible.builtin.env', 'GCE_CREDENTIALS_FILE_PATH') }}"
+    # - name: Debug backend_config_files
+    #   set_fact: 
+    #     cred_file_path: "{{ lookup('ansible.builtin.env', 'GCE_CREDENTIALS_FILE_PATH') }}"
 
-    - name: print
-      debug:
-        var: lookup('ansible.builtin.file', cred_file_path)
+    # - name: print
+    #   debug:
+    #     var: lookup('ansible.builtin.file', cred_file_path)
 
 
     - name: Deploy with force init
@@ -31,4 +31,11 @@
         force_init: true
       environment:
         GOOGLE_APPLICATION_CREDENTIALS: "{{ lookup('ansible.builtin.env', 'GCE_CREDENTIALS_FILE_PATH') }}"
+      register: terraform_output
+      check_mode: "{{ bool_terraform_plan_mode }}"
 
+    - name: Set Stats Terraform plan/apply
+      ansible.builtin.set_stats:
+        data:
+          gce_tf_plan: "{{ terraform_output }}"
+        per_host: false
