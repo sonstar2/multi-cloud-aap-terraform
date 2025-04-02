@@ -37,10 +37,10 @@
     - name: Debug terraform_output
       debug:
         msg: "{{ terraform_output }}"
-        
+
     - name: Set Stats Terraform plan/apply
       ansible.builtin.set_stats:
         data:
           gce_tf_plan: "{{ terraform_output.stdout }}"
-          gce_vm_name: "{{ terraform_output.outputs.host_name.value }}"
+          gce_vm_name: "{{ terraform_output.outputs.host_name.value | default(omit) }}"
         per_host: false
