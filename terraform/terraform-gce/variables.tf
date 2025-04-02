@@ -1,7 +1,7 @@
 variable "gcp_project" {
  type        = string
  description = "Project Name"
- default     = "openenv-vczht"
+ default     = "openenv-ljjrh"
 }
 
 variable "region" {
