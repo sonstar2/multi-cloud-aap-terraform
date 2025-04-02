@@ -47,6 +47,10 @@
       check_mode: "{{ bool_terraform_plan_mode }}"
       register: terraform_output
 
+    - name: Debug terraform_output
+      debug:
+        msg: "{{ terraform_output }}"
+        
     - name: Set Stats Terraform plan/apply
       ansible.builtin.set_stats:
         data:
